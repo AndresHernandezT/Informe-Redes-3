@@ -1,1 +1,98 @@
+\documentclass[onecolumn,12pt]{IEEEtran}
+\usepackage[utf8]{inputenc}
+\usepackage[left=1in,right=1in,bottom=0.95in,nohead,nofoot]{geometry}
+\usepackage{graphicx}
 
+\begin{document}
+\title{Informe Laboratorio 3}
+\author{Redes de Datos}
+%\vspace{3mm}
+
+\begin{figure}[h]
+\includegraphics[width=0.50\textwidth]{logo_udp.png}
+\label{fig:mesh1}
+\\
+\\
+\\
+\\
+\\
+\maketitle
+\end{figure}
+\begin{center}
+Integrantes:\\
+\hfill \\
+Gonzalo Felipe\\
+Andres Hernandez\\
+Franco Centeno\\
+\hfill \\
+\hfill \\
+\hfill \\
+\hfill \\
+\ \hfill \\
+Profesor:\\
+Jose Perez\\ \hfill \\
+Ayudante:\\
+Alexis Inzunza\\
+\end{center}
+
+\newpage
+\title{Indice}
+\author{ }
+\maketitle
+\hrule
+\tableofcontents
+
+\newpage
+\section{INTRODUCCION}
+En este laboratorio analizaremos el flujo de paquetes en redes, y para poder comprobar el funcionamiento de algún servicio se deberán crear paquetes personalizados. Para todo esto se utilizará Scapy, el cual es un programa hecho
+en Python que permite crear cualquier tipo de paquete y enviarlo a la red, y también Wireshark, para poder observar el flujo de paquetes.
+
+\section{ACTIVIDAD}
+\hfill \\
+La actividad consiste en crear un archivo python, el cual importa a Scapy, para usar la siguiente lista de comandos:\\
+ls(pkt): muestra campos y valores de un paquete que recibe como argumento \\
+Ether(): comando basado en la capa 2 de OSI. \\
+IP(): comando basado en la capa 3 de OSI. \\ 
+ICMP(): comando basado en la capa 4 de OSI. \\
+Raw(): comando basado en un payload para modelo OSI.\\ \\
+A cada comando se le puede asignar una variable para luego revisar todos campos con el comando ls().\\ \\
+Para formar un paquete se deben apilar los paquetes en el
+mismo orden según la pila OSI basándonos en modelo capa1/capa2/......./capa N.
+Existen dos métodos para enviar un paquete:\\
+• send(pkt): trabaja a nivel de capa 3, manejando enrutamiento y capa 2 de forma automática.\\
+• sendp(pkt): trabaja a nivel de capa 2, permitiendo indicar la interfaz correcta y todos los
+parámetros de esta capa en forma manual (direcciones MAC).
+Ya que se está trabajando con capa 2, se utiliza la función sendp()
+
+
+\section{CUESTIONARIO}
+\hfill \\
+1.
+¿Qué sucede cuando se envía un paquete a la dirección FF:FF:FF:FF:FF:FF? ¿Quiénes lo reciben?
+¿Por qué?\\ \\
+R: Lo reciben todos los hosts vinculados al LAN porque se manda ip broadcast.\\ \\
+2.
+¿Qué pasa cuando se envía un paquete a la MAC de otro equipo? ¿Quiénes lo pueden recibir? ¿Por
+qué?\\ \\
+R: Simplemente se envía, la recibe solamente el host cuya MAC fue descrita anteriormente, es el único que puede recibirlo, ya que el paquete va hacia el switch, luego el switch pregunta por la MAC y después cuando ya tiene la informacion de a que host el pertenecía es MAC, se lo manda a ese host.\\
+\newpage
+3.
+¿Que sucede si se envía un paquete a una MAC que no corresponda a ningún equipo de la red? ¿Quienes
+lo pueden recepcionar? ¿Por que?\\ \\
+R: No se envía, si no existe la MAC dentro de la VLAN, o esta en otra VLAN. Nadie lo puede recepcionar, porque en la ultima parte del código cuando se pone el comando para enviar "sendp(pkt)", este solamente trabaja en la capa del switch o sea en la red, en cambio si hubiese sido por router y le hubiese puesto IP, ahí se manda a cualquier otro lado.\\ \\
+
+\section{CONCLUSION}
+\hfill \\
+
+Del laboratorio se pudo concluir que los mensajes se puden enviar manualmente mediante Scapy que es un programa interactivo para crear y desglozar paquetes de protocolos, ademas de enviarlos. Lo interesante de Scapy es que  se puede realizar rutinas de paquetes gracias a Python ,tambien que los mensajes se puden enviar de forma automatica mediante cierta funcion de Scapy llamada SEND(pkt) que trabaja en la capa 3 del modelo OSI que maneja el enrutamiento y la capa 2 automaticamente  y se comprobo el envio de los mensajes mediante Wireshark que su funcion fue ver todos los flujos de paquetes del computador.
+
+\hfill \\
+\hfill \\
+\section{BIBLIOGRAFIA}
+
+Wireshark,
+\emph{Wireshark} \\
+\url{http://wwww.wireshark.com} \\
+
+
+\end{document} 
